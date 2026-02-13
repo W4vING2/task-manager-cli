@@ -1,6 +1,8 @@
 from tasks.filter import *
 from tasks.utils import *
-from tasks.decors import *
+from database import *
+
+init_db()
 
 while True:
     print("Welcome to the task manager cli")
@@ -17,13 +19,13 @@ while True:
         add_task(title, description)
     elif choice == 2:
         print("All tasks")
-        print(load_tasks())
+        print(get_all_tasks())
         print("1) All tasks")
         print("2) Completed tasks")
         print("3) Incomplete tasks")
         task_choice = int(input("Enter your choice: "))
         if task_choice == 1:
-            tasks = sorted(load_tasks(), key=lambda x: x['id'])
+            tasks = sorted(get_all_tasks(), key=lambda x: x['id'])
         elif task_choice == 2:
             tasks = sorted(filter_tasks(True), key=lambda x: x['id'])
         elif task_choice == 3:
